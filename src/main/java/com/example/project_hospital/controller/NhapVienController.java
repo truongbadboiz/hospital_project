@@ -26,17 +26,6 @@ public class NhapVienController {
     }
     @GetMapping("/benhnhan")
     public ResponseEntity<List<BenhNhanRes>> getAllBenhNhan() {
-        List<BenhNhan> list = nhapVienService.getAllBenhNhan();
-
-        List<BenhNhanRes> res = list.stream().map(bn -> BenhNhanRes.builder()
-                .maBenhNhan(bn.getMaBenhNhan())
-                .hoTen(bn.getHoTen())
-                .ngaySinh(bn.getNgaySinh())
-                .gioiTinh(bn.getGioiTinh())
-                .soCMND(bn.getSoCCCD())
-                .diaChi(bn.getDiaChi())
-                .build()).toList();
-
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(nhapVienService.getAllBenhNhanRes());
     }
 }

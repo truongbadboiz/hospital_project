@@ -1,6 +1,7 @@
 package com.example.project_hospital.service.impl;
 
 import com.example.project_hospital.dto.request.NhapVienReq;
+import com.example.project_hospital.dto.response.BenhNhanRes;
 import com.example.project_hospital.dto.response.NhapVienRes;
 import com.example.project_hospital.entity.BenhNhan;
 import com.example.project_hospital.entity.NhapVien;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 
 @Service
@@ -51,7 +54,16 @@ public class NhapVienImpl implements NhapVienService {
         );
 
     }
-    public List<BenhNhan> getAllBenhNhan() {
-        return benhNhanRepo.findAll();
+    public List<BenhNhanRes> getAllBenhNhanRes() {
+        return benhNhanRepo.findAll().stream()
+                .map(bn -> BenhNhanRes.builder()
+                        .maBenhNhan(bn.getMaBenhNhan())
+                        .hoTen(bn.getHoTen())
+                        .ngaySinh(bn.getNgaySinh())
+                        .gioiTinh(bn.getGioiTinh())
+                        .soCMND(bn.getSoCCCD())
+                        .diaChi(bn.getDiaChi())
+                        .build())
+                .toList();
     }
 }
