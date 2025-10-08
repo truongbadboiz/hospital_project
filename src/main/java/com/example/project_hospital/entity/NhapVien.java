@@ -18,6 +18,7 @@ public class NhapVien {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long maNhapVien;
     @Column(name = "ngayNhapVien")
+
     private Date ngayNhapVien;
     @Column(name="khoaDieuTri")
     private String khoaDieuTri;
