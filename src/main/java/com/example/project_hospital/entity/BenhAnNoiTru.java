@@ -14,9 +14,10 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 @Table(name="benhannoitru")
-public class BenhNhanNoiTru {
+public class BenhAnNoiTru {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "maBenhAn")
     private Long maBenhAn;
     @ManyToOne
     @JoinColumn(name = "maNhapVien")
@@ -31,4 +32,6 @@ public class BenhNhanNoiTru {
     private String ketQuaDieuTri;
     @Column(name="trangThai")
     private String trangThai;
+    @Column(name="hinhAnhUrl")
+    private String hinhAnhUrl;
 }

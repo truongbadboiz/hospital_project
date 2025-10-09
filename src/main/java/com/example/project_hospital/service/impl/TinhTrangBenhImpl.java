@@ -2,7 +2,7 @@ package com.example.project_hospital.service.impl;
 
 import com.example.project_hospital.dto.request.TinhTrangBenhReq;
 import com.example.project_hospital.dto.response.TinhTrangBenhRes;
-import com.example.project_hospital.entity.BenhNhanNoiTru;
+import com.example.project_hospital.entity.BenhAnNoiTru;
 import com.example.project_hospital.entity.TinhTrangBenh;
 import com.example.project_hospital.repository.BenhNhanNoiTruRepo;
 import com.example.project_hospital.repository.TinhTrangBenhRepo;
@@ -22,13 +22,13 @@ public class TinhTrangBenhImpl implements TinhTrangBenhService {
 
     @Override
     public void saveOrUpdate(TinhTrangBenhReq req) {
-        BenhNhanNoiTru benhAn = benhAnRepository.findById(req.getMaBenhAn())
+        BenhAnNoiTru benhAn = benhAnRepository.findById(req.getMaBenhAn())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh án"));
 
         TinhTrangBenh entity = tinhTrangBenhRepo
                 .findByBenhNhanNoiTru_MaBenhAnAndNgay(req.getMaBenhAn(), req.getNgay())
                 .orElse(TinhTrangBenh.builder()
-                        .benhNhanNoiTru(benhAn)
+                        .benhAnNoiTru(benhAn)
                         .ngay(req.getNgay())
                         .build());
 

@@ -21,7 +21,7 @@ public class TinhTrangBenh {
     private Long maTinhTrang;
     @ManyToOne
     @JoinColumn(name = "maBenhAn")
-    private BenhNhanNoiTru benhNhanNoiTru;
+    private BenhAnNoiTru benhAnNoiTru;
     @Column(name="ngay")
     private Date ngay;
     @Column(name="tinhTrang")
