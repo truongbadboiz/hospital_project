@@ -31,19 +31,45 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
                 .trangThai(req.getTrangThai())
                 .hinhAnhUrl(imageUrl)
                 .build();
-
-      BenhAnNoiTru saved = benhAnNoiTruRepo.save(benhAn);
-      return new BenhAnNoiTruRes(
-              saved.getMaBenhAn(),
-              saved.getNhapVien().getMaNhapVien(),
-              saved.getNgayLap(),
-              saved.getTomTatBenhAn(),
-              saved.getTienSuBenh(),
-              saved.getKetQuaDieuTri(),
-              saved.getTrangThai(),
-              saved.getHinhAnhUrl()
-      );
+        benhAnNoiTruRepo.save(benhAn);
+        return toRes(benhAn);
     }
+    @Override
+    public BenhAnNoiTruRes updateBenhAn(Long maBenhAn, BenhAnNoiTruReq req) {
+        BenhAnNoiTru benhAn = benhAnNoiTruRepo.findById(maBenhAn)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh án : " + maBenhAn));
+
+        if (req.getHinhAnh() != null && !req.getHinhAnh().isEmpty()) {
+            fileUtils.deleteFile(benhAn.getHinhAnhUrl());
+            benhAn.setHinhAnhUrl(fileUtils.saveFile(req.getHinhAnh(), "hoso"));
+        }
+
+        benhAn.setNgayLap(req.getNgayLap());
+        benhAn.setTomTatBenhAn(req.getTomTatBenhAn());
+        benhAn.setTienSuBenh(req.getTienSuBenh());
+        benhAn.setKetQuaDieuTri(req.getKetQuaDieuTri());
+        benhAn.setTrangThai(req.getTrangThai());
+
+        benhAnNoiTruRepo.save(benhAn);
+        return toRes(benhAn);
+    }
+
+    @Override
+
+    public void delete(Long maBenhAn) {
+        BenhAnNoiTru benhAn = benhAnNoiTruRepo.findById(maBenhAn)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh án: " + maBenhAn));
+        try {
+            if (benhAn.getHinhAnhUrl() != null) {
+                fileUtils.deleteFile(benhAn.getHinhAnhUrl());
+            }
+        } catch (Exception ignored) {}
+
+        benhAnNoiTruRepo.delete(benhAn);
+    }
+
+
+
     @Override
     public List<BenhAnNoiTruRes> getBenhNhanDangDieuTri() {
         List<BenhAnNoiTru> ds = benhAnNoiTruRepo.findByTrangThai("Đang điều trị");
@@ -61,5 +87,17 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
                 )
                 .collect(Collectors.toList());
 
+    }
+    private BenhAnNoiTruRes toRes(BenhAnNoiTru entity) {
+        return BenhAnNoiTruRes.builder()
+                .maBenhAn(entity.getMaBenhAn())
+                .maNhapVien(entity.getNhapVien().getMaNhapVien())
+                .ngayLap(entity.getNgayLap())
+                .tomTatBenhAn(entity.getTomTatBenhAn())
+                .tienSuBenh(entity.getTienSuBenh())
+                .ketQuaDieuTri(entity.getKetQuaDieuTri())
+                .trangThai(entity.getTrangThai())
+                .hinhAnhUrl(entity.getHinhAnhUrl())
+                .build();
     }
 }

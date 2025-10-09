@@ -8,7 +8,8 @@ import java.util.List;
 public interface BenhAnNoiTruService {
     List<BenhAnNoiTruRes> getBenhNhanDangDieuTri();
     BenhAnNoiTruRes createBenhNhan(BenhAnNoiTruReq req);
-    //    BenhNhanNoiTruRes update(Long id, BenhNhanNoiTruReq req);
-//    BenhNhanNoiTruRes getById(Long id);
-//    void delete(Long id);
+    BenhAnNoiTruRes updateBenhAn(Long maBenhAn, BenhAnNoiTruReq req);
+
+    //    BenhNhanNoiTruRes getById(Long id);
+    void delete(Long maBenhAn);
 }

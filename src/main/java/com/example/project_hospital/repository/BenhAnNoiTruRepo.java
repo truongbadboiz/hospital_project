@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
     public interface BenhAnNoiTruRepo extends JpaRepository<BenhAnNoiTru, Long> {
         List<BenhAnNoiTru> findByTrangThai(String trangThai);
-
+        Optional<BenhAnNoiTru>findByMaBenhAn(Long maBenhAn);
 
     }
 

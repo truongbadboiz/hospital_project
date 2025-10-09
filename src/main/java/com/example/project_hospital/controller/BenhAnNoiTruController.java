@@ -25,4 +25,19 @@ public class BenhAnNoiTruController {
        BenhAnNoiTruRes response = benhAnNoiTruService.createBenhNhan(req);
         return ResponseEntity.ok(response);
     }
+    @PutMapping("/updatebenhannoitru/{maBenhAn}")
+    public ResponseEntity<BenhAnNoiTruRes> updateBenhAnNoiTru(
+            @PathVariable Long maBenhAn,
+            @RequestBody BenhAnNoiTruReq req
+    ) {
+        BenhAnNoiTruRes response = benhAnNoiTruService.updateBenhAn(maBenhAn, req);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/xoabenhannoitru/{maBenhAn}")
+    public ResponseEntity<?>delete(@PathVariable Long maBenhAn)
+        {
+        benhAnNoiTruService.delete(maBenhAn);
+        return ResponseEntity.ok("Đã xóa bệnh án");
+        }
 }

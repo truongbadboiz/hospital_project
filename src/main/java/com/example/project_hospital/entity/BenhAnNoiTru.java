@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,4 +36,17 @@ public class BenhAnNoiTru {
     private String trangThai;
     @Column(name="hinhAnhUrl")
     private String hinhAnhUrl;
+
+
+    // CASCADE DELETE - Tự động xóa tất cả TinhTrangBenh khi xóa BenhAnNoiTru
+    @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TinhTrangBenh> tinhTrangBenh = new ArrayList<>();
+
+    // CASCADE DELETE - Tự động xóa tất cả KetQuaXetNghiem khi xóa BenhAnNoiTru
+    @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<KetQuaXetNghiem> ketQuaXetNghiem = new ArrayList<>();
+
+    // CASCADE DELETE - Tự động xóa tất cả KetQuaXetNghiem khi xóa BenhAnNoiTru
+    @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<YLenhDieuTri> yLenhDieuTri = new ArrayList<>();
 }
