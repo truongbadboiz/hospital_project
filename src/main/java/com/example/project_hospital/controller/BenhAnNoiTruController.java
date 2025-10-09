@@ -1,6 +1,6 @@
 package com.example.project_hospital.controller;
 
-import com.example.project_hospital.dto.request.BenhNhanNoiTruReq;
+import com.example.project_hospital.dto.request.BenhAnNoiTruReq;
 import com.example.project_hospital.dto.response.BenhAnNoiTruRes;
 import com.example.project_hospital.service.BenhAnNoiTruService;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,12 @@ import java.util.List;
 public class BenhAnNoiTruController {
     private final BenhAnNoiTruService benhAnNoiTruService;
 
-    @GetMapping("/benhnhannoitru")
+    @GetMapping("/danhsachbenhannoitru")
     public ResponseEntity<List<BenhAnNoiTruRes>> getBenhNhanDangDieuTri() {
         return ResponseEntity.ok(benhAnNoiTruService.getBenhNhanDangDieuTri());
     }
     @PostMapping("/benhannoitru")
-    public ResponseEntity<BenhAnNoiTruRes> createBenhnhanNoiTru(@RequestBody BenhNhanNoiTruReq req)
+    public ResponseEntity<BenhAnNoiTruRes> createBenhnhanNoiTru(@RequestBody BenhAnNoiTruReq req)
     {
        BenhAnNoiTruRes response = benhAnNoiTruService.createBenhNhan(req);
         return ResponseEntity.ok(response);

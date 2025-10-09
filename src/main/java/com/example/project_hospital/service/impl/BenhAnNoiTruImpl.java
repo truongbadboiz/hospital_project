@@ -1,10 +1,10 @@
 package com.example.project_hospital.service.impl;
 
-import com.example.project_hospital.dto.request.BenhNhanNoiTruReq;
+import com.example.project_hospital.dto.request.BenhAnNoiTruReq;
 import com.example.project_hospital.dto.response.BenhAnNoiTruRes;
 import com.example.project_hospital.entity.BenhAnNoiTru;
 import com.example.project_hospital.entity.NhapVien;
-import com.example.project_hospital.repository.BenhNhanNoiTruRepo;
+import com.example.project_hospital.repository.BenhAnNoiTruRepo;
 import com.example.project_hospital.service.BenhAnNoiTruService;
 import com.example.project_hospital.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
-    private final BenhNhanNoiTruRepo benhNhanNoiTruRepo;
+    private final BenhAnNoiTruRepo benhAnNoiTruRepo;
     private final FileUtils fileUtils;
 
     @Override
-    public BenhAnNoiTruRes createBenhNhan(BenhNhanNoiTruReq req) {
+    public BenhAnNoiTruRes createBenhNhan(BenhAnNoiTruReq req) {
         String imageUrl = fileUtils.saveFile(req.getHinhAnh(), "hoso");
         BenhAnNoiTru benhAn = BenhAnNoiTru.builder()
                 .nhapVien(NhapVien.builder().maNhapVien(req.getMaNhapVien()).build())
@@ -32,7 +32,7 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
                 .hinhAnhUrl(imageUrl)
                 .build();
 
-      BenhAnNoiTru saved = benhNhanNoiTruRepo.save(benhAn);
+      BenhAnNoiTru saved = benhAnNoiTruRepo.save(benhAn);
       return new BenhAnNoiTruRes(
               saved.getMaBenhAn(),
               saved.getNhapVien().getMaNhapVien(),
@@ -46,7 +46,7 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
     }
     @Override
     public List<BenhAnNoiTruRes> getBenhNhanDangDieuTri() {
-        List<BenhAnNoiTru> ds = benhNhanNoiTruRepo.findByTrangThai("Đang điều trị");
+        List<BenhAnNoiTru> ds = benhAnNoiTruRepo.findByTrangThai("Đang điều trị");
 
         return ds.stream()
                 .map(ba -> BenhAnNoiTruRes.builder()

@@ -4,7 +4,7 @@ import com.example.project_hospital.dto.request.TinhTrangBenhReq;
 import com.example.project_hospital.dto.response.TinhTrangBenhRes;
 import com.example.project_hospital.entity.BenhAnNoiTru;
 import com.example.project_hospital.entity.TinhTrangBenh;
-import com.example.project_hospital.repository.BenhNhanNoiTruRepo;
+import com.example.project_hospital.repository.BenhAnNoiTruRepo;
 import com.example.project_hospital.repository.TinhTrangBenhRepo;
 import com.example.project_hospital.service.TinhTrangBenhService;
 import jakarta.transaction.Transactional;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional
 public class TinhTrangBenhImpl implements TinhTrangBenhService {
-    private final BenhNhanNoiTruRepo benhAnRepository;
+    private final BenhAnNoiTruRepo benhAnRepository;
     private final TinhTrangBenhRepo tinhTrangBenhRepo;
 
     @Override
@@ -26,7 +26,7 @@ public class TinhTrangBenhImpl implements TinhTrangBenhService {
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh án"));
 
         TinhTrangBenh entity = tinhTrangBenhRepo
-                .findByBenhNhanNoiTru_MaBenhAnAndNgay(req.getMaBenhAn(), req.getNgay())
+                .findByBenhAnNoiTru_MaBenhAnAndNgay(req.getMaBenhAn(), req.getNgay())
                 .orElse(TinhTrangBenh.builder()
                         .benhAnNoiTru(benhAn)
                         .ngay(req.getNgay())
@@ -39,7 +39,7 @@ public class TinhTrangBenhImpl implements TinhTrangBenhService {
 
     @Override
     public List<TinhTrangBenhRes> getHistory(Long maBenhAn) {
-        return tinhTrangBenhRepo.findByBenhNhanNoiTru_MaBenhAn(maBenhAn)
+        return tinhTrangBenhRepo.findByBenhAnNoiTru_MaBenhAn(maBenhAn)
                 .stream()
                 .map(t -> {
                     TinhTrangBenhRes res = new TinhTrangBenhRes();
@@ -54,7 +54,7 @@ public class TinhTrangBenhImpl implements TinhTrangBenhService {
     @Override
     public void deleteByNgay(Long maBenhAn, String ngayStr) {
         java.sql.Date ngay = java.sql.Date.valueOf(ngayStr);
-        tinhTrangBenhRepo.findByBenhNhanNoiTru_MaBenhAnAndNgay(maBenhAn, ngay)
+        tinhTrangBenhRepo.findByBenhAnNoiTru_MaBenhAnAndNgay(maBenhAn, ngay)
                 .ifPresent(tinhTrangBenhRepo::delete);
     }
 }
