@@ -29,10 +29,11 @@ public class NhapVienImpl implements NhapVienService {
 
 
         NhapVien nv = NhapVien.builder()
-                .benhNhan(BenhNhan.builder().maBenhNhan(request.getMaBenhNhan()).build())
+                .benhNhan(bn)
                 .ngayNhapVien(request.getNgayNhapVien())
                 .khoaDieuTri(request.getKhoaDieuTri())
                 .giuong(request.getGiuong())
+                .phong(request.getPhong())
                 .chanDoan(request.getChuanDoan())
                 .maBacSi(request.getMaBacSi())
                 .build();

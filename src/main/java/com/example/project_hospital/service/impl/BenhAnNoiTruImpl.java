@@ -40,7 +40,7 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
     }
     @Override
     public BenhAnNoiTruRes updateBenhAn(Long maBenhAn, BenhAnNoiTruReq req) {
-        BenhAnNoiTru benhAn = benhAnNoiTruRepo.findById(maBenhAn)
+        BenhAnNoiTru benhAn = benhAnNoiTruRepo.findByMaBenhAn(maBenhAn)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh án : " + maBenhAn));
 
         if (req.getHinhAnh() != null && !req.getHinhAnh().isEmpty()) {

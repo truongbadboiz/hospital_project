@@ -12,6 +12,5 @@ public interface BenhAnNoiTruService {
     BenhAnNoiTruRes createBenhNhan(BenhAnNoiTruReq req);
     BenhAnNoiTruRes updateBenhAn(Long maBenhAn, BenhAnNoiTruReq req);
     List<Map<String, Object>> search(String keyword);
-    //    BenhNhanNoiTruRes getById(Long id);
     void delete(Long maBenhAn);
 }
