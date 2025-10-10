@@ -48,22 +48,7 @@ public class BenhAnNoiTruController {
 
     @PostMapping("/timkiem")
     public ResponseEntity<List<Map<String, Object>>> timKiem(@RequestBody Map<String, String> body) {
-        String keyword = body.get("keyword");
-        List<BenhAnNoiTru> ds = benhAnNoiTruService.search(keyword);
-
-        List<Map<String, Object>> result = ds.stream()
-                .map(bn -> {
-                    Map<String, Object> map = new LinkedHashMap<>();
-                    map.put("MaNhapVien", bn.getNhapVien().getMaNhapVien());
-                    map.put("HoTen", bn.getNhapVien().getBenhNhan().getHoTen());
-                    map.put("Phong", bn.getNhapVien().getPhong());
-                    map.put("KhoaDieuTri", bn.getNhapVien().getKhoaDieuTri());
-                    map.put("TrangThai", bn.getTrangThai());
-                    return map;
-                })
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(benhAnNoiTruService.search(body.get("keyword")));
     }
 
 

@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,9 +58,22 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
         return toRes(benhAn);
     }
     @Override
-    public List<BenhAnNoiTru> search(String keyword) {
-        return benhAnNoiTruRepo.findAll(BenhAnNoiTruSpec.hasKeyword(keyword));
+    public List<Map<String, Object>> search(String keyword) {
+        List<BenhAnNoiTru> ds = benhAnNoiTruRepo.findAll(BenhAnNoiTruSpec.hasKeyword(keyword));
+
+        return ds.stream()
+                .map(bn -> {
+                    Map<String, Object> map = new LinkedHashMap<>();
+                    map.put("MaNhapVien", bn.getNhapVien().getMaNhapVien());
+                    map.put("HoTen", bn.getNhapVien().getBenhNhan().getHoTen());
+                    map.put("Phong", bn.getNhapVien().getPhong());
+                    map.put("KhoaDieuTri", bn.getNhapVien().getKhoaDieuTri());
+                    map.put("TrangThai", bn.getTrangThai());
+                    return map;
+                })
+                .collect(Collectors.toList());
     }
+
     @Override
 
     public void delete(Long maBenhAn) {
