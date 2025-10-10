@@ -2,7 +2,7 @@ package com.example.project_hospital.service;
 
 import com.example.project_hospital.dto.request.BenhAnNoiTruReq;
 import com.example.project_hospital.dto.response.BenhAnNoiTruRes;
-import com.example.project_hospital.entity.BenhAnNoiTru;
+
 
 import java.util.List;
 import java.util.Map;

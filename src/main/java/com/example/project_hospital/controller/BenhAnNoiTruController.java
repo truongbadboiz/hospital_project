@@ -51,5 +51,4 @@ public class BenhAnNoiTruController {
         return ResponseEntity.ok(benhAnNoiTruService.search(body.get("keyword")));
     }
 
-
 }

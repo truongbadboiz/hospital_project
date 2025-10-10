@@ -57,6 +57,8 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
         benhAnNoiTruRepo.save(benhAn);
         return toRes(benhAn);
     }
+
+
     @Override
     public List<Map<String, Object>> search(String keyword) {
         List<BenhAnNoiTru> ds = benhAnNoiTruRepo.findAll(BenhAnNoiTruSpec.hasKeyword(keyword));
