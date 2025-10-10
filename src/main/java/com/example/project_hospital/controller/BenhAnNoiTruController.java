@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -51,13 +52,15 @@ public class BenhAnNoiTruController {
         List<BenhAnNoiTru> ds = benhAnNoiTruService.search(keyword);
 
         List<Map<String, Object>> result = ds.stream()
-                .map(bn -> Map.<String, Object>of(
-                        "MaNhapVien", bn.getNhapVien().getMaNhapVien(),
-                        "HoTen", bn.getNhapVien().getBenhNhan().getHoTen(),
-                        "Phong", bn.getNhapVien().getPhong(),
-                        "KhoaDieuTri", bn.getNhapVien().getKhoaDieuTri(),
-                        "TrangThai", bn.getTrangThai()
-                ))
+                .map(bn -> {
+                    Map<String, Object> map = new LinkedHashMap<>();
+                    map.put("MaNhapVien", bn.getNhapVien().getMaNhapVien());
+                    map.put("HoTen", bn.getNhapVien().getBenhNhan().getHoTen());
+                    map.put("Phong", bn.getNhapVien().getPhong());
+                    map.put("KhoaDieuTri", bn.getNhapVien().getKhoaDieuTri());
+                    map.put("TrangThai", bn.getTrangThai());
+                    return map;
+                })
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(result);

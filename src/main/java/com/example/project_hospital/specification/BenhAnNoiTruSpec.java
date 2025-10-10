@@ -10,6 +10,7 @@ public class BenhAnNoiTruSpec {
             if (keyword == null || keyword.trim().isEmpty()) {
                 return cb.conjunction();
             }
+
             var nhapVienJoin = root.join("nhapVien");
             var benhNhanJoin = nhapVienJoin.join("benhNhan");
             String likePattern = "%" + keyword.trim().toLowerCase() + "%";
