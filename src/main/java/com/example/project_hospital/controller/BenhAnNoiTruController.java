@@ -2,12 +2,16 @@ package com.example.project_hospital.controller;
 
 import com.example.project_hospital.dto.request.BenhAnNoiTruReq;
 import com.example.project_hospital.dto.response.BenhAnNoiTruRes;
+import com.example.project_hospital.entity.BenhAnNoiTru;
 import com.example.project_hospital.service.BenhAnNoiTruService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -40,4 +44,24 @@ public class BenhAnNoiTruController {
         benhAnNoiTruService.delete(maBenhAn);
         return ResponseEntity.ok("Đã xóa bệnh án");
         }
+
+    @PostMapping("/timkiem")
+    public ResponseEntity<List<Map<String, Object>>> timKiem(@RequestBody Map<String, String> body) {
+        String keyword = body.get("keyword");
+        List<BenhAnNoiTru> ds = benhAnNoiTruService.search(keyword);
+
+        List<Map<String, Object>> result = ds.stream()
+                .map(bn -> Map.<String, Object>of(
+                        "MaNhapVien", bn.getNhapVien().getMaNhapVien(),
+                        "HoTen", bn.getNhapVien().getBenhNhan().getHoTen(),
+                        "Phong", bn.getNhapVien().getPhong(),
+                        "KhoaDieuTri", bn.getNhapVien().getKhoaDieuTri(),
+                        "TrangThai", bn.getTrangThai()
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(result);
+    }
+
+
 }

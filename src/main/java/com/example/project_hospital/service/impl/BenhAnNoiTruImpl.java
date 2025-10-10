@@ -6,8 +6,10 @@ import com.example.project_hospital.entity.BenhAnNoiTru;
 import com.example.project_hospital.entity.NhapVien;
 import com.example.project_hospital.repository.BenhAnNoiTruRepo;
 import com.example.project_hospital.service.BenhAnNoiTruService;
+import com.example.project_hospital.specification.BenhAnNoiTruSpec;
 import com.example.project_hospital.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,7 +55,10 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
         benhAnNoiTruRepo.save(benhAn);
         return toRes(benhAn);
     }
-
+    @Override
+    public List<BenhAnNoiTru> search(String keyword) {
+        return benhAnNoiTruRepo.findAll(BenhAnNoiTruSpec.hasKeyword(keyword));
+    }
     @Override
 
     public void delete(Long maBenhAn) {

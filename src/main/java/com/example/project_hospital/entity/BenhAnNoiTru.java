@@ -37,7 +37,6 @@ public class BenhAnNoiTru {
     @Column(name="hinhAnhUrl")
     private String hinhAnhUrl;
 
-
     // CASCADE DELETE - Tự động xóa tất cả TinhTrangBenh khi xóa BenhAnNoiTru
     @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TinhTrangBenh> tinhTrangBenh = new ArrayList<>();
