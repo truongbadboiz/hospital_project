@@ -17,4 +17,6 @@ public class BenhAnNoiTruReq {
     private String ketQuaDieuTri;
     private String trangThai;
     private MultipartFile hinhAnh;
+    private int page = 0;
+    private int size = 10;
 }

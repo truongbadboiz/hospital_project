@@ -20,4 +20,6 @@ public class BenhAnNoiTruRes {
     private String ketQuaDieuTri;
     private String trangThai;
     private String hinhAnhUrl;
+    private int page = 0;
+    private int size = 10;
 }
