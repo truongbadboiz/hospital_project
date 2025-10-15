@@ -8,11 +8,10 @@ import java.io.IOException;
 import java.util.List;
 
 public interface PhacDoDieuTriService {
-    PhacDoDieuTriRes addPhacDo(PhacDoDieuTriReq req, MultipartFile file) throws IOException;
-    PhacDoDieuTriRes updatePhacDo(Long id, PhacDoDieuTriReq req, MultipartFile file) throws IOException;
-    void deletePhacDo(Long id);
-    PhacDoDieuTriRes getPhacDo(Long id);
-    List<PhacDoDieuTriRes> getAllPhacDo();
+    PhacDoDieuTriRes createPhacDoDieuTri(PhacDoDieuTriReq request) throws IOException;
+    public List<PhacDoDieuTriRes> getAllPhacDoDieuTri();
+    PhacDoDieuTriRes updatePhacDoDieuTri(Long maYLenh, PhacDoDieuTriReq request) throws IOException;
+    void deletePhacDoDieuTri(Long maYLenh);
 
 
 

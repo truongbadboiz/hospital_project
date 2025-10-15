@@ -15,5 +15,5 @@ public class PhacDoDieuTriRes {
     private Long maBenhAn;
     private String noiDung;
     private String trangThai;
-    private String fileUrl;
+    private byte[] fileData;
 }

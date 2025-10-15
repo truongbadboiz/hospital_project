@@ -2,7 +2,10 @@ package com.example.project_hospital.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -33,8 +36,17 @@ public class YLenhDieuTri {
     @Column(name = "trangThai", length = 50)
     private String trangThai;
 
+
+    @Column(name = "filePath", columnDefinition = "TEXT")
+    private String filePath;
+
+    @Column(name = "fileData", columnDefinition = "LONGBLOB")
+    private byte[] fileData;
+
     @OneToMany(mappedBy = "yLenhDieuTri", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TheoDoiDieuTri> dsTheoDoiDieuTri;
     @OneToMany(mappedBy = "yLenh", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ThuocSuDung> thuocSuDungList;
+
+
 }
