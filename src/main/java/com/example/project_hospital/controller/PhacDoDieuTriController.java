@@ -22,11 +22,7 @@ public class PhacDoDieuTriController {
 
     private final PhacDoDieuTriService phacDoDieuTriService;
 
-//    // CREATE
-//    @PostMapping("/add")
-//    public ResponseEntity<PhacDoDieuTriRes> createPhacDo(@ModelAttribute PhacDoDieuTriReq request) throws IOException {
-//        return ResponseEntity.ok(phacDoDieuTriService.createPhacDoDieuTri(request));
-//    }
+
 
     @PostMapping("/add")
     public ResponseEntity<PhacDoDieuTriRes> createPhacDo(
@@ -37,7 +33,7 @@ public class PhacDoDieuTriController {
             @RequestParam("trangThai") String trangThai,
             @RequestParam(value = "file", required = false) MultipartFile file
     ) throws IOException {
-        // Tạo request object
+
         PhacDoDieuTriReq request = new PhacDoDieuTriReq();
         request.setMaBenhAn(maBenhAn);
         request.setMaBacSi(maBacSi);
@@ -51,11 +47,24 @@ public class PhacDoDieuTriController {
 
 
     // UPDATE
-    @PutMapping(value = "/update/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping("/update/{id}")
     public ResponseEntity<PhacDoDieuTriRes> updatePhacDo(
             @PathVariable Long id,
-            @ModelAttribute PhacDoDieuTriReq request
+            @RequestParam("maBenhAn") Long maBenhAn,
+            @RequestParam("maBacSi") String maBacSi,
+            @RequestParam("ngayGio") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate ngayGio,
+            @RequestParam("noiDung") String noiDung,
+            @RequestParam("trangThai") String trangThai,
+            @RequestParam(value = "file", required = false) MultipartFile file
     ) throws IOException {
+        PhacDoDieuTriReq request = new PhacDoDieuTriReq();
+        request.setMaBenhAn(maBenhAn);
+        request.setMaBacSi(maBacSi);
+        request.setNgayGio(ngayGio.atStartOfDay());
+        request.setNoiDung(noiDung);
+        request.setTrangThai(trangThai);
+        request.setFile(file);
+
         return ResponseEntity.ok(phacDoDieuTriService.updatePhacDoDieuTri(id, request));
     }
 
@@ -66,12 +75,12 @@ public class PhacDoDieuTriController {
         return ResponseEntity.noContent().build();
     }
 
-//    // GET ONE
-//    @GetMapping("/{id}")
-//    public ResponseEntity<PhacDoDieuTriRes> getPhacDo(@PathVariable Long id) {
-//        return ResponseEntity.ok(phacDoDieuTriService.(id));
-//    }
-
+    // GET BY ID
+    @GetMapping("/{id}")
+    public ResponseEntity<PhacDoDieuTriRes> getPhacDo(@PathVariable Long id) {
+        PhacDoDieuTriRes res = phacDoDieuTriService.getPhacDoById(id);
+        return ResponseEntity.ok(res);
+    }
     // GET ALL
     @GetMapping("/getAll")
     public ResponseEntity<List<PhacDoDieuTriRes>> getAllPhacDo() {

@@ -48,6 +48,15 @@ public class PhacDoDieuTriImpl implements PhacDoDieuTriService {
                 .collect(Collectors.toList());
     }
 
+
+    @Override
+    public PhacDoDieuTriRes getPhacDoById(Long id) {
+        return yLenhDieuTriRepository.findById(id)
+                .map(this::mapToResponse) // map entity -> response
+                .orElseThrow(() -> new RuntimeException("Phác đồ không tồn tại với id: " + id));
+    }
+
+
     // UPDATE
     @Override
     public PhacDoDieuTriRes updatePhacDoDieuTri(Long maYLenh, PhacDoDieuTriReq request) throws IOException {

@@ -8,8 +8,9 @@ import java.io.IOException;
 import java.util.List;
 
 public interface PhacDoDieuTriService {
+    PhacDoDieuTriRes getPhacDoById(Long id);
     PhacDoDieuTriRes createPhacDoDieuTri(PhacDoDieuTriReq request) throws IOException;
-    public List<PhacDoDieuTriRes> getAllPhacDoDieuTri();
+     List<PhacDoDieuTriRes> getAllPhacDoDieuTri();
     PhacDoDieuTriRes updatePhacDoDieuTri(Long maYLenh, PhacDoDieuTriReq request) throws IOException;
     void deletePhacDoDieuTri(Long maYLenh);
 
