@@ -36,4 +36,6 @@ public class NhapVien {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "maBenhNhan", nullable = false)
     private BenhNhan benhNhan;
+
+
 }

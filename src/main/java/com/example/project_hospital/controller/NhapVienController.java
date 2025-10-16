@@ -6,6 +6,7 @@ import com.example.project_hospital.dto.response.BenhNhanRes;
 import com.example.project_hospital.dto.response.NhapVienRes;
 
 import com.example.project_hospital.entity.BenhNhan;
+import com.example.project_hospital.entity.NhapVien;
 import com.example.project_hospital.service.NhapVienService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,4 +29,9 @@ public class NhapVienController {
     public ResponseEntity<List<BenhNhanRes>> getAllBenhNhan() {
         return ResponseEntity.ok(nhapVienService.getAllBenhNhanRes());
     }
+    @GetMapping("/nhapvien")
+    public ResponseEntity<List<NhapVienRes>> getAllNhapVien() {
+        return ResponseEntity.ok(nhapVienService.getAllNhapVienRes());
+    }
+
 }

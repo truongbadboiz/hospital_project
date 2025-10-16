@@ -5,14 +5,12 @@ import com.example.project_hospital.dto.response.PhacDoDieuTriRes;
 import com.example.project_hospital.service.PhacDoDieuTriService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -21,8 +19,6 @@ import java.util.List;
 public class PhacDoDieuTriController {
 
     private final PhacDoDieuTriService phacDoDieuTriService;
-
-
 
     @PostMapping("/add")
     public ResponseEntity<PhacDoDieuTriRes> createPhacDo(
@@ -44,7 +40,6 @@ public class PhacDoDieuTriController {
 
         return ResponseEntity.ok(phacDoDieuTriService.createPhacDoDieuTri(request));
     }
-
 
     // UPDATE
     @PutMapping("/update/{id}")
@@ -81,6 +76,7 @@ public class PhacDoDieuTriController {
         PhacDoDieuTriRes res = phacDoDieuTriService.getPhacDoById(id);
         return ResponseEntity.ok(res);
     }
+
     // GET ALL
     @GetMapping("/getAll")
     public ResponseEntity<List<PhacDoDieuTriRes>> getAllPhacDo() {

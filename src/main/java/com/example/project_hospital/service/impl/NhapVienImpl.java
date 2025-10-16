@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -55,6 +56,26 @@ public class NhapVienImpl implements NhapVienService {
         );
 
     }
+    @Override
+    public List<NhapVienRes> getAllNhapVienRes() {
+        List<NhapVien> list = nhapVienRepo.findAll();
+
+        return list.stream()
+                .map(nv -> new NhapVienRes(
+                        nv.getMaNhapVien(),
+                        nv.getBenhNhan().getMaBenhNhan(),
+                        nv.getBenhNhan().getHoTen(),
+                        nv.getNgayNhapVien(),
+                        nv.getKhoaDieuTri(),
+                        nv.getPhong(),
+                        nv.getGiuong(),
+                        nv.getChanDoan(),
+                        "Đang điều trị"
+                ))
+                .toList();
+    }
+    
+    @Override
     public List<BenhNhanRes> getAllBenhNhanRes() {
         return benhNhanRepo.findAll().stream()
                 .map(bn -> BenhNhanRes.builder()

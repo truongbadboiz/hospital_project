@@ -15,7 +15,5 @@ import java.util.Optional;
 @Repository
 public interface TinhTrangBenhRepo extends JpaRepository<TinhTrangBenh, Long> {
     List<TinhTrangBenh> findByBenhAnNoiTru_MaBenhAn(Long maBenhAn);
-
     Optional<TinhTrangBenh> findByBenhAnNoiTru_MaBenhAnAndNgay(Long maBenhAn, Date ngay);
-
 }
