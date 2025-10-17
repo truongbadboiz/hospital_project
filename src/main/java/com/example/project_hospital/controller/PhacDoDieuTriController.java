@@ -73,9 +73,11 @@ public class PhacDoDieuTriController {
     // GET BY ID
     @GetMapping("/{id}")
     public ResponseEntity<PhacDoDieuTriRes> getPhacDo(@PathVariable Long id) {
-        PhacDoDieuTriRes res = phacDoDieuTriService.getPhacDoById(id);
-        return ResponseEntity.ok(res);
+        return phacDoDieuTriService.getPhacDoById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
 
     // GET ALL
     @GetMapping("/getAll")

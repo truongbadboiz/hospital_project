@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,23 +41,20 @@ public class PhacDoDieuTriImpl implements PhacDoDieuTriService {
         return mapToResponse(saved);
     }
 
-    // GET ALL
-    @Override
-    public List<PhacDoDieuTriRes> getAllPhacDoDieuTri() {
+
+    @Override public List<PhacDoDieuTriRes> getAllPhacDoDieuTri() {
         return yLenhDieuTriRepository.findAll().stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors
+                        .toList()
+                );
     }
 
-
-    @Override
-    public PhacDoDieuTriRes getPhacDoById(Long id) {
-        return yLenhDieuTriRepository.findById(id)
-                .map(this::mapToResponse) // map entity -> response
-                .orElseThrow(() -> new RuntimeException("Phác đồ không tồn tại với id: " + id));
+    @Override public Optional<PhacDoDieuTriRes> getPhacDoById(Long id) {
+        return yLenhDieuTriRepository
+                .findById(id)
+                .map(this::mapToResponse);
     }
-
-
     // UPDATE
     @Override
     public PhacDoDieuTriRes updatePhacDoDieuTri(Long maYLenh, PhacDoDieuTriReq request) throws IOException {
@@ -94,14 +92,22 @@ public class PhacDoDieuTriImpl implements PhacDoDieuTriService {
         }
     }
 
-    // HELPER: map entity → response
+
     private PhacDoDieuTriRes mapToResponse(YLenhDieuTri entity) {
-        return PhacDoDieuTriRes.builder()
-                .maYLenh(entity.getMaYLenh())
-                .maBenhAn(entity.getBenhAnNoiTru() != null ? entity.getBenhAnNoiTru().getMaBenhAn() : null)
-                .noiDung(entity.getNoiDung())
-                .trangThai(entity.getTrangThai())
-                .fileData(entity.getFileData())
-                .build();
+        var res = new PhacDoDieuTriRes();
+        res.setMaYLenh(entity.getMaYLenh());
+        res.setNoiDung(entity.getNoiDung());
+        res.setTrangThai(entity.getTrangThai());
+
+        if (entity.getBenhAnNoiTru() != null
+                && entity.getBenhAnNoiTru().getNhapVien() != null
+                && entity.getBenhAnNoiTru().getNhapVien().getBenhNhan() != null) {
+            res.setMaBenhAn(entity.getBenhAnNoiTru().getMaBenhAn());
+            res.setHoTen(entity.getBenhAnNoiTru().getNhapVien().getBenhNhan().getHoTen());
+            res.setPhong(entity.getBenhAnNoiTru().getNhapVien().getPhong());
+            res.setGiuong(entity.getBenhAnNoiTru().getNhapVien().getGiuong());
+        }
+
+        return res;
     }
 }
