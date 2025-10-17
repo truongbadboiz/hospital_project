@@ -2,19 +2,15 @@ package com.example.project_hospital.controller;
 
 import com.example.project_hospital.dto.request.BenhAnNoiTruReq;
 import com.example.project_hospital.dto.response.BenhAnNoiTruRes;
+import com.example.project_hospital.dto.response.BenhAnNoiTruRes2;
 import com.example.project_hospital.dto.response.PageResponse;
-import com.example.project_hospital.entity.BenhAnNoiTru;
 import com.example.project_hospital.service.BenhAnNoiTruService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -28,17 +24,17 @@ public class BenhAnNoiTruController {
     }
 
     @PostMapping("/benhannoitru")
-    public ResponseEntity<BenhAnNoiTruRes> createBenhnhanNoiTru(@RequestBody BenhAnNoiTruReq req) {
-        BenhAnNoiTruRes response = benhAnNoiTruService.createBenhNhan(req);
+    public ResponseEntity<BenhAnNoiTruRes2> createBenhnhanNoiTru(@RequestBody BenhAnNoiTruReq req) {
+        BenhAnNoiTruRes2 response = benhAnNoiTruService.createBenhNhan(req);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/updatebenhannoitru/{maBenhAn}")
-    public ResponseEntity<BenhAnNoiTruRes> updateBenhAnNoiTru(
+    public ResponseEntity<BenhAnNoiTruRes2> updateBenhAnNoiTru(
             @PathVariable Long maBenhAn,
             @RequestBody BenhAnNoiTruReq req
     ) {
-        BenhAnNoiTruRes response = benhAnNoiTruService.updateBenhAn(maBenhAn, req);
+        BenhAnNoiTruRes2 response = benhAnNoiTruService.updateBenhAn(maBenhAn, req);
         return ResponseEntity.ok(response);
     }
 
