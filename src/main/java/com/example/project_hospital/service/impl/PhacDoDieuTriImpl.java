@@ -69,9 +69,7 @@ public class PhacDoDieuTriImpl implements PhacDoDieuTriService {
         yLenh.setNgayGio(request.getNgayGio());
         yLenh.setNoiDung(request.getNoiDung());
         yLenh.setTrangThai(request.getTrangThai());
-
         saveFileToEntity(yLenh, request.getFile());
-
         YLenhDieuTri updated = yLenhDieuTriRepository.save(yLenh);
         return mapToResponse(updated);
     }
