@@ -10,6 +10,7 @@ import java.sql.Date;
 @Builder
 public class BenhAnNoiTruReq {
     private Long maBenhAn;
+    private String maBenhNhan;
     private Long maNhapVien;
     private Date ngayLap;
     private String tomTatBenhAn;

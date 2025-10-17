@@ -13,6 +13,8 @@ import java.sql.Date;
 @Builder
 public class BenhAnNoiTruRes {
     private Long maBenhAn;
+    private String maBenhNhan;
+    private String hoTen;
     private Long maNhapVien;
     private Date ngayLap;
     private String tomTatBenhAn;

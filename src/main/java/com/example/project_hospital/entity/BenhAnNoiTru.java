@@ -22,6 +22,9 @@ public class BenhAnNoiTru {
     @Column(name = "maBenhAn")
     private Long maBenhAn;
     @ManyToOne
+    @JoinColumn(name = "maBenhNhan")
+    private BenhNhan benhNhan;
+    @ManyToOne
     @JoinColumn(name = "maNhapVien")
     private NhapVien nhapVien;
     @Column(name="ngayLap")
@@ -37,15 +40,12 @@ public class BenhAnNoiTru {
     @Column(name="hinhAnhUrl")
     private String hinhAnhUrl;
 
-    // CASCADE DELETE - Tự động xóa tất cả TinhTrangBenh khi xóa BenhAnNoiTru
     @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TinhTrangBenh> tinhTrangBenh = new ArrayList<>();
 
-    // CASCADE DELETE - Tự động xóa tất cả KetQuaXetNghiem khi xóa BenhAnNoiTru
     @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<KetQuaXetNghiem> ketQuaXetNghiem = new ArrayList<>();
 
-    // CASCADE DELETE - Tự động xóa tất cả KetQuaXetNghiem khi xóa BenhAnNoiTru
     @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<YLenhDieuTri> yLenhDieuTri = new ArrayList<>();
 }

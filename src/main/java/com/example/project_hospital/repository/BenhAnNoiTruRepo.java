@@ -13,6 +13,5 @@ import java.util.Optional;
     public interface BenhAnNoiTruRepo extends JpaRepository<BenhAnNoiTru, Long>, JpaSpecificationExecutor<BenhAnNoiTru> {
         List<BenhAnNoiTru> findByTrangThai(String trangThai);
         Optional<BenhAnNoiTru>findByMaBenhAn(Long maBenhAn);
-
     }
 
