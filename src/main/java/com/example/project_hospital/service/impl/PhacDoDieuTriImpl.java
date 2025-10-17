@@ -96,6 +96,7 @@ public class PhacDoDieuTriImpl implements PhacDoDieuTriService {
     private PhacDoDieuTriRes mapToResponse(YLenhDieuTri entity) {
         var res = new PhacDoDieuTriRes();
         res.setMaYLenh(entity.getMaYLenh());
+        res.setMaBacSi(entity.getMaBacSi());
         res.setNoiDung(entity.getNoiDung());
         res.setTrangThai(entity.getTrangThai());
 

@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class PhacDoDieuTriRes {
     private Long maYLenh;
     private Long maBenhAn;
+    private String maBacSi;
     private String hoTen;
     private String phong;
     private String giuong;
