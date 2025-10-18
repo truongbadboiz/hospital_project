@@ -62,7 +62,7 @@ public class XuatVienImpl implements XuatVienService {
                 .ngaySinh(benhNhan.getNgaySinh())
                 .gioiTinh(benhNhan.getGioiTinh())
                 .soCMND(benhNhan.getSoCCCD())
-                .tinhTrang(benhAn.getTinhTrangBenh().getTinhTrang())
+                .tinhTrang(benhAn.getTinhTrangBenh() != null ? benhAn.getTinhTrangBenh().getTinhTrang() : "Đã xuất viện")
                 .ghiChu(entity.getGhiChu())
                 .trangThai(entity.getTrangThai())
                 .ngayRaVien(entity.getNgayRaVien())
