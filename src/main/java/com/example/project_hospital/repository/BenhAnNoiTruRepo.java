@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface BenhAnNoiTruRepo extends JpaRepository<BenhAnNoiTru, Long>, JpaSpecificationExecutor<BenhAnNoiTru> {
-    List<BenhAnNoiTru> findByTrangThai(String trangThai);
     Optional<BenhAnNoiTru> findByMaBenhAn(Long maBenhAn);
     boolean existsByNhapVien_MaNhapVien(Long maNhapVien);
 

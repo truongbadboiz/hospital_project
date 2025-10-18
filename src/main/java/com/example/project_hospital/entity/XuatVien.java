@@ -25,7 +25,7 @@ public class XuatVien {
     @Column(name = "ngayRaVien")
     private LocalDate ngayRaVien;
 
-    @Column(name = "trangThai", columnDefinition = "ENUM('Đã ra viện', 'Tái khám')")
+    @Column(name = "trangThai", columnDefinition = "ENUM('Đã xuất viện', 'Tái khám')")
     private String trangThai;
 
     @Column(name = "ghiChu", columnDefinition = "TEXT")

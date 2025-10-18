@@ -132,7 +132,7 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
     @Override
     public List<BenhAnNoiTruRes> getBenhNhanDangDieuTri() {
 
-        List<BenhAnNoiTru> ds = benhAnNoiTruRepo.findByTrangThai("Đang điều trị");
+        List<BenhAnNoiTru> ds = benhAnNoiTruRepo.findAll();
 
         return ds.stream()
                 .map(ba -> {
