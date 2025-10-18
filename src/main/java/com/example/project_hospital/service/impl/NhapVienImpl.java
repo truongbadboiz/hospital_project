@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-
 @Service
 @RequiredArgsConstructor
 public class NhapVienImpl implements NhapVienService {
@@ -27,7 +26,6 @@ public class NhapVienImpl implements NhapVienService {
     {
         BenhNhan bn = benhNhanRepo.findById(request.getMaBenhNhan())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh nhân"));
-
 
         NhapVien nv = NhapVien.builder()
                 .benhNhan(bn)
@@ -56,6 +54,7 @@ public class NhapVienImpl implements NhapVienService {
         );
 
     }
+
     @Override
     public List<NhapVienRes> getAllNhapVienRes() {
         List<NhapVien> list = nhapVienRepo.findAll();

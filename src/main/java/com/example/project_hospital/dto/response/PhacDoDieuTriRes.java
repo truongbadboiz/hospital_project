@@ -1,6 +1,7 @@
 package com.example.project_hospital.dto.response;
 
 
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +20,6 @@ public class PhacDoDieuTriRes {
     private String giuong;
     private String noiDung;
     private String trangThai;
+    @Lob
     private byte[] fileData;
 }

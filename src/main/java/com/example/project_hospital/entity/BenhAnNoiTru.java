@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,35 +16,46 @@ import java.util.List;
 @Builder
 @Table(name="benhannoitru")
 public class BenhAnNoiTru {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maBenhAn")
     private Long maBenhAn;
+
     @ManyToOne
     @JoinColumn(name = "maBenhNhan")
     private BenhNhan benhNhan;
-    @ManyToOne
-    @JoinColumn(name = "maNhapVien")
+
+    @OneToOne
+    @JoinColumn(name = "maNhapVien", unique = true)
     private NhapVien nhapVien;
+
     @Column(name="ngayLap")
     private Date ngayLap;
+
     @Column(name="tomTatBenhAn")
     private String tomTatBenhAn;
+
     @Column(name="tienSuBenh")
     private String tienSuBenh;
+
     @Column(name="ketQuaDieuTri")
     private String ketQuaDieuTri;
+
     @Column(name="trangThai")
     private String trangThai;
+
     @Column(name="hinhAnhUrl")
     private String hinhAnhUrl;
 
+    // 1 bệnh án chỉ có 1 tình trạng bệnh
+    @OneToOne(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private TinhTrangBenh tinhTrangBenh;
+
+    // Các quan hệ khác
     @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TinhTrangBenh> tinhTrangBenh = new ArrayList<>();
+    private List<KetQuaXetNghiem> ketQuaXetNghiem;
 
     @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<KetQuaXetNghiem> ketQuaXetNghiem = new ArrayList<>();
-
-    @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<YLenhDieuTri> yLenhDieuTri = new ArrayList<>();
+    private List<YLenhDieuTri> yLenhDieuTri;
 }

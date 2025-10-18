@@ -29,19 +29,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
     private final BenhAnNoiTruRepo benhAnNoiTruRepo;
-    private final BenhNhanRepo benhNhanRepository;
     private final NhapVienRepo nhapVienRepo;
     private final FileUtils fileUtils;
 
     @Override
     @Transactional
     public BenhAnNoiTruRes2 createBenhNhan(BenhAnNoiTruReq req) {
-        // 1. Validate mã nhập viện
+
         if (req.getMaNhapVien() == null) {
             throw new IllegalArgumentException("Mã nhập viện không được để trống");
         }
 
-        // 2. Lấy thông tin nhập viện
         NhapVien nhapVien = nhapVienRepo.findById(req.getMaNhapVien())
                 .orElseThrow(() -> new RuntimeException(
                         "Không tìm thấy thông tin nhập viện với mã: " + req.getMaNhapVien()
@@ -51,20 +49,17 @@ public class BenhAnNoiTruImpl implements BenhAnNoiTruService {
             throw new RuntimeException("Phiếu nhập viện không có thông tin bệnh nhân");
         }
 
-        // 3. Kiểm tra mã nhập viện đã có bệnh án chưa
         if (benhAnNoiTruRepo.existsByNhapVien_MaNhapVien(req.getMaNhapVien())) {
             throw new RuntimeException(
                     "Mã nhập viện " + req.getMaNhapVien() + " đã có bệnh án"
             );
         }
 
-        // 4. Lưu file nếu có
         String imageUrl = null;
         if (req.getHinhAnh() != null && !req.getHinhAnh().isEmpty()) {
             imageUrl = fileUtils.saveFile(req.getHinhAnh(), "hoso");
         }
 
-        // 5. Tạo bệnh án mới
         BenhAnNoiTru benhAn = BenhAnNoiTru.builder()
                 .nhapVien(nhapVien)
                 .ngayLap(req.getNgayLap())

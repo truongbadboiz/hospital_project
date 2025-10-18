@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.sql.Date;
 
 @Entity
@@ -13,21 +12,26 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "tinhtrangbenh")
+@Table(name="tinhtrangbenh")
 public class TinhTrangBenh {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long maTinhTrang;
-    @ManyToOne
-    @JoinColumn(name = "maBenhAn")
+
+    @OneToOne
+    @JoinColumn(name = "maBenhAn", unique = true)
     private BenhAnNoiTru benhAnNoiTru;
+
     @Column(name="ngay")
     private Date ngay;
+
     @Column(name="tinhTrang")
     private String tinhTrang;
+
     @Column(name = "ghiChu")
     private String ghiChu;
+
     @Column(name = "ngayTao")
     private Date ngayTao;
 }

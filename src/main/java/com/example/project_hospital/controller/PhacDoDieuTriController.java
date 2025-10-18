@@ -33,7 +33,7 @@ public class PhacDoDieuTriController {
         PhacDoDieuTriReq request = new PhacDoDieuTriReq();
         request.setMaBenhAn(maBenhAn);
         request.setMaBacSi(maBacSi);
-        request.setNgayGio(ngayGio.atStartOfDay()); // Convert LocalDate -> LocalDateTime
+        request.setNgayGio(ngayGio.atStartOfDay());
         request.setNoiDung(noiDung);
         request.setTrangThai(trangThai);
         request.setFile(file);
@@ -41,7 +41,6 @@ public class PhacDoDieuTriController {
         return ResponseEntity.ok(phacDoDieuTriService.createPhacDoDieuTri(request));
     }
 
-    // UPDATE
     @PutMapping("/update/{id}")
     public ResponseEntity<PhacDoDieuTriRes> updatePhacDo(
             @PathVariable Long id,
@@ -63,14 +62,12 @@ public class PhacDoDieuTriController {
         return ResponseEntity.ok(phacDoDieuTriService.updatePhacDoDieuTri(id, request));
     }
 
-    // DELETE
     @DeleteMapping("/del/{id}")
     public ResponseEntity<Void> deletePhacDo(@PathVariable Long id) {
         phacDoDieuTriService.deletePhacDoDieuTri(id);
         return ResponseEntity.noContent().build();
     }
 
-    // GET BY ID
     @GetMapping("/{id}")
     public ResponseEntity<PhacDoDieuTriRes> getPhacDo(@PathVariable Long id) {
         return phacDoDieuTriService.getPhacDoById(id)
@@ -78,8 +75,6 @@ public class PhacDoDieuTriController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
-    // GET ALL
     @GetMapping("/getAll")
     public ResponseEntity<List<PhacDoDieuTriRes>> getAllPhacDo() {
         return ResponseEntity.ok(phacDoDieuTriService.getAllPhacDoDieuTri());

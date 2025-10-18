@@ -18,7 +18,6 @@ import java.util.Date;
 public class PhacDoDieuTriReq {
     private Long maBenhAn;
     private String maBacSi;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime ngayGio;
     private String noiDung;

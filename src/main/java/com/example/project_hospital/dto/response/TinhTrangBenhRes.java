@@ -15,5 +15,4 @@ public class TinhTrangBenhRes {
     private Date ngay;
     private String tinhTrang;
     private String ghiChu;
-
 }
