@@ -21,7 +21,6 @@ public class PhacDoDieuTriImpl implements PhacDoDieuTriService {
     private final PhacDoDieuTriRepo yLenhDieuTriRepository;
     private final BenhAnNoiTruRepo benhAnNoiTruRepository;
 
-
     @Override
     public PhacDoDieuTriRes createPhacDoDieuTri(PhacDoDieuTriReq request) throws IOException {
         BenhAnNoiTru benhAnNoiTru = benhAnNoiTruRepository.findById(request.getMaBenhAn())
@@ -38,7 +37,6 @@ public class PhacDoDieuTriImpl implements PhacDoDieuTriService {
         YLenhDieuTri saved = yLenhDieuTriRepository.save(yLenh);
         return mapToResponse(saved);
     }
-
 
     @Override public List<PhacDoDieuTriRes> getAllPhacDoDieuTri() {
         return yLenhDieuTriRepository.findAll().stream()

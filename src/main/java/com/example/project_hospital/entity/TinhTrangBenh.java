@@ -19,8 +19,8 @@ public class TinhTrangBenh {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long maTinhTrang;
 
-    @OneToOne
-    @JoinColumn(name = "maBenhAn", unique = true)
+    @ManyToOne
+    @JoinColumn(name = "maBenhAn")
     private BenhAnNoiTru benhAnNoiTru;
 
     @Column(name="ngay")

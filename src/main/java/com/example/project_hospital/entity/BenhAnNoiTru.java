@@ -48,9 +48,8 @@ public class BenhAnNoiTru {
     @Column(name="hinhAnhUrl")
     private String hinhAnhUrl;
 
-    // 1 bệnh án chỉ có 1 tình trạng bệnh
-    @OneToOne(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private TinhTrangBenh tinhTrangBenh;
+    @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TinhTrangBenh> tinhTrangBenhs;
 
     // Các quan hệ khác
     @OneToMany(mappedBy = "benhAnNoiTru", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -13,6 +13,5 @@ import java.util.Optional;
 public interface BenhAnNoiTruRepo extends JpaRepository<BenhAnNoiTru, Long>, JpaSpecificationExecutor<BenhAnNoiTru> {
     Optional<BenhAnNoiTru> findByMaBenhAn(Long maBenhAn);
     boolean existsByNhapVien_MaNhapVien(Long maNhapVien);
-
 }
 

@@ -48,5 +48,4 @@ public class YLenhDieuTri {
     @OneToMany(mappedBy = "yLenh", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ThuocSuDung> thuocSuDungList;
 
-
 }
